@@ -1,0 +1,146 @@
+{
+ "creation": "2013-02-22 01:27:36",
+ "description": "Defines actions on states and the next step and allowed roles.",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "state",
+  "action",
+  "next_state",
+   "column_break_4",
+  "assign_user_mode",
+  "user",
+  "doc_field",
+  "allowed",
+   "column_break_5",
+  "multi_user_action_mode",
+  "allow_self_approval",
+  "is_approve",
+  "conditions",
+  "condition",
+  "column_break_7",
+  "example"
+ ],
+ "fields": [
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "State",
+   "options": "Workflow State",
+   "print_width": "200px",
+   "reqd": 1,
+   "width": "200px"
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Action",
+   "options": "Workflow Action Master",
+   "print_width": "200px",
+   "reqd": 1,
+   "width": "200px"
+  },
+  {
+   "fieldname": "next_state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Next State",
+   "options": "Workflow State",
+   "print_width": "200px",
+   "reqd": 1,
+   "width": "200px"
+  },
+  {
+   "depends_on": "eval:doc.assign_user_mode=='Role From Workflow'",
+   "fieldname": "allowed",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Allowed",
+   "options": "Role",
+   "print_width": "200px",
+   "reqd": 1,
+   "width": "200px"
+  },
+  {
+   "default": "1",
+   "description": "Allow approval for creator of the document",
+   "fieldname": "allow_self_approval",
+   "fieldtype": "Check",
+   "label": "Allow Self Approval"
+  },
+  {
+   "fieldname": "conditions",
+   "fieldtype": "Section Break",
+   "label": "Conditions"
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Code",
+   "label": "Condition"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "example",
+   "fieldtype": "HTML",
+   "label": "Example",
+   "options": "<pre><code>doc.grand_total &gt; 0</code></pre>\n\n<p>Conditions should be written in simple Python. Please use properties available in the form only.</p>"
+  },
+  {
+   "default": "Role From Workflow",
+   "fieldname": "assign_user_mode",
+   "fieldtype": "Select",
+   "label": "Assign User Mode",
+   "options": "User From Doc Field\nUser From Workflow\nRole From Doc Field\nRole From Workflow"
+  },
+  {
+   "depends_on": "eval:doc.assign_user_mode == 'User From Workflow'",
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "depends_on": "eval:doc.assign_user_mode =='User From Doc Field' || doc.assign_user_mode =='User From Doc Field'=='Role From Doc Field'",
+   "fieldname": "doc_field",
+   "fieldtype": "Data",
+   "label": "Doc Field"
+  },
+  {
+   "default": "Any",
+   "fieldname": "multi_user_action_mode",
+   "fieldtype": "Select",
+   "label": "Multi User Action Mode",
+   "options": "All\nAny"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_approve",
+   "fieldtype": "Check",
+   "label": "Is Approve"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "idx": 1,
+ "istable": 1,
+ "modified": "2019-07-05 16:35:20.389874",
+ "modified_by": "Administrator",
+ "module": "Workflow",
+ "name": "Workflow Transition",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
